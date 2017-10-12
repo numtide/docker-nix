@@ -10,15 +10,12 @@ RUN apk add --no-cache openssl
 # Select which nix release to install
 ARG NIX_RELEASE=1.11.14
 
-# Download Nix and install it into the system.
-ADD https://nixos.org/releases/nix/nix-$NIX_RELEASE/nix-$NIX_RELEASE-x86_64-linux.tar.bz2 /nix.tar.bz2
-
 # Install it in busybox for a start
 COPY ./alpine-install.sh ./alpine-install.sh
-RUN ./alpine-install.sh /nix.tar.bz2
+RUN ./alpine-install.sh
 
 # FIXME: Give us a shell
-RUN nix-env -iA nixpkgs.bash
+RUN /nix/var/nix/profiles/default/bin/nix-env -iA nixpkgs.bash
 
 # Now create the actual image
 FROM scratch
