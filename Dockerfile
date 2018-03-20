@@ -20,7 +20,12 @@ RUN nix-channel --add \
   nix-channel --update
 
 RUN nix-env -iA \
-  nixpkgs.bashInteractive nixpkgs.coreutils nixpkgs.cacert
+  nixpkgs.bashInteractive \
+  nixpkgs.cacert \
+  nixpkgs.coreutils \
+  nixpkgs.gnutar \
+  nixpkgs.gzip \
+  && true
 
 RUN nix-collect-garbage -d
 
