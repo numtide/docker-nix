@@ -22,7 +22,11 @@ RUN nix-channel --add \
 RUN nix-env -iA \
   nixpkgs.bashInteractive nixpkgs.coreutils nixpkgs.cacert
 
-RUN nix-collect-garbage -d
+# Remove old things
+RUN \
+  nix-channel --remove nixpkgs && \
+  rm -rf /nix/store/*-nixpkgs* && \
+  nix-collect-garbage -d
 
 # Fixes root login shell
 RUN sed -e "s|/bin/ash|/bin/bash|g" -i /etc/passwd
