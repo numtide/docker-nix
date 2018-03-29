@@ -34,6 +34,9 @@ RUN \
   rm -rf /nix/store/*-nixpkgs* && \
   nix-collect-garbage -d
 
+# Fixes missing hashes
+RUN nix-store --verify --check-contents
+
 # Fixes root login shell
 RUN sed -e "s|/bin/ash|/bin/bash|g" -i /etc/passwd
 
