@@ -25,6 +25,7 @@ RUN nix-env -iA \
   nixpkgs.coreutils \
   nixpkgs.gnutar \
   nixpkgs.gzip \
+  nixpkgs.xz \
   && true
 
 # Remove old things
