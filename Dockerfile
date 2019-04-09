@@ -68,4 +68,7 @@ ENV \
     NIX_SSL_CERT_FILE=/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt \
     NIX_PATH=/nix/var/nix/profiles/per-user/root/channels
 
+# The sandbox requires privileged docker containers
+RUN mkdir -p /etc/nix && echo sandbox = false > /etc/nix/nix.conf
+
 CMD "bash"
